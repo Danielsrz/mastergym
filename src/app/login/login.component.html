@@ -1,0 +1,36 @@
+<div class="container">
+
+    <div class="text-center"> 
+        <h3> Bienvenido a Master Gym</h3>
+        <img src="assets/gymlogo.png"/>
+        <h4> Ingrese sus datos</h4>
+    </div>
+
+    <form [formGroup]="formularioLogin">
+        <div class="mb-3">
+            <label for="Email1" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="Email1" formControlName="email" aria-describedby="emailHelp" placeholder="Ingrese su correo" autocomplete="off">
+            <div *ngIf="formularioLogin.controls['email'].invalid && formularioLogin.controls['email'].dirty" class="alert alert-danger" role="alert">
+                <span *ngIf="formularioLogin.controls['email'].errors.required"> El correo es requerido </span>
+                <span *ngIf="formularioLogin.controls['email'].errors.email"> El correo es inválido </span>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="Password" class="form-label">Contraseña</label>
+            <input type="password" (keyUp.enter)="ingresar()" class="form-control" id="Password" formControlName="password" placeholder="Ingrese su contraseña">
+            <div *ngIf="formularioLogin.controls['password'].invalid && formularioLogin.controls['password'].dirty" class="alert alert-danger" role="alert">
+                <span *ngIf="formularioLogin.controls['password'].errors.required"> La contraseña es requerida </span>
+            </div>
+        </div>
+        <div *ngIf="!datosCorrectos" class="alert alert-danger" role="alert">
+            {{ textoError }}
+        </div>
+        <button type="submit" (click)="ingresar()" [disabled]="!formularioLogin.valid" class="btn btn-primary">Ingresar</button>
+    </form>
+
+    <ngx-spinner bdColor ="rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+
+
+    
+
+</div>
